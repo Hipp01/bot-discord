@@ -10,9 +10,9 @@ class DevineLeNombre(commands.Cog):
 	async def dln(self, ctx):
 		await ctx.send("Début de la partie !")
 		await ctx.send("Pour choisir le niveau tu peux utiliser les commandes:")
-		await ctx.send("`!niveau facile` pour chercher un nombre entre 1 et 500")
-		await ctx.send("`!niveau normal` pour chercher un nombre entre 1 et 1000")
-		await ctx.send("`!niveau difficile` pour chercher un nombre entre 1 et 5000")
+		await ctx.send("`!niveau facile` pour chercher un nombre entre 1 et 500 (+1 point)")
+		await ctx.send("`!niveau normal` pour chercher un nombre entre 1 et 1000 (+2 points)")
+		await ctx.send("`!niveau difficile` pour chercher un nombre entre 1 et 5000 (+4 points)")
 
 	@commands.command()
 	async def niveau(self, ctx, niveaux):
@@ -34,11 +34,51 @@ class DevineLeNombre(commands.Cog):
 
 	@commands.command()
 	async def devine(self, ctx, nombre):
+		name = ctx.author.name
 		try:
 			nombre = int(nombre)
 			if nombre == self.nombre_bot:
 				await ctx.send("Bravo, tu as gagné !")
 				await ctx.send("Le nombre était : " + str(self.nombre_bot))
+				if self.niveaux == "facile":
+					try:
+						fichier = open(name, 'r')
+						scores = fichier.read()
+						fichier.close()
+						scores = str(int(scores)+1)
+						fichier = open(name, 'w')
+						fichier.write(scores)
+						fichier.close()
+					except FileNotFoundError:
+						fichier = open(name, 'w')
+						fichier.write("1")
+						fichier.close()
+				if self.niveaux == "normal":
+					try:
+						fichier = open(name, 'r')
+						scores = fichier.read()
+						fichier.close()
+						scores = str(int(scores)+2)
+						fichier = open(name, 'w')
+						fichier.write(scores)
+						fichier.close()
+					except FileNotFoundError:
+						fichier = open(name, 'w')
+						fichier.write("2")
+						fichier.close()
+				if self.niveaux == "difficile":
+					try:
+						fichier = open(name, 'r')
+						scores = fichier.read()
+						fichier.close()
+						scores = str(int(scores)+4)
+						fichier = open(name, 'w')
+						fichier.write(scores)
+						fichier.close()
+					except FileNotFoundError:
+						fichier = open(name, 'w')
+						fichier.write("4")
+						fichier.close()
 				return
 			elif self.niveaux == "facile":
 				if nombre > 500 or nombre <= 0:
