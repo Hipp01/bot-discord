@@ -4,6 +4,7 @@ from morpion import Morpion
 from pendu import Pendu
 from funny import Funny
 from devinelenombre import DevineLeNombre
+from gamescore import Score
 
 intents = discord.Intents.default()
 intents.messages = True
@@ -19,6 +20,7 @@ async def on_ready():
     await bot.add_cog(Pendu(bot))
     await bot.add_cog(Funny(bot))
     await bot.add_cog(DevineLeNombre(bot))
+    await bot.add_cog(Score(bot))
 
 @bot.command()
 async def ping(ctx):
