@@ -4,13 +4,33 @@ import random
 class DevineLeNombre(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
+		self.niveaux = None
 
 	@commands.command()
 	async def devine_le_nombre(self, ctx):
-		self.nombre_bot = random.randint(0, 1000)
 		await ctx.send("Début de la partie !")
-		await ctx.send("J'ai choisis un nombre entre 1 et 1000 !")
-		await ctx.send("Pour jouer tu peux utiliser la commande `!devine <nombre>`.")
+		await ctx.send("Pour choisir le niveau tu peux utiliser les commandes:")
+		await ctx.send("`!niveau facile` pour chercher un nombre entre 1 et 500")
+		await ctx.send("`!niveau normal` pour chercher un nombre entre 1 et 1000")
+		await ctx.send("`!niveau difficile` pour chercher un nombre entre 1 et 5000")
+
+	@commands.command()
+	async def niveau(self, ctx, niveaux):
+		self.niveaux = niveaux
+		if niveaux == "facile":
+			self.nombre_bot = random.randint(1, 500)
+			await ctx.send("C'est bon ! J'ai choisis un nombre entre 1 et 500 !")
+			await ctx.send("Pour jouer tu peux utiliser la commande `!devine <nombre>`.")
+		elif niveaux == "normal":
+			self.nombre_bot = random.randint(1, 1000)
+			await ctx.send("C'est bon ! J'ai choisis un nombre entre 1 et 1000 !")
+			await ctx.send("Pour jouer tu peux utiliser la commande `!devine <nombre>`.")
+		elif niveaux == "difficile":
+			self.nombre_bot = random.randint(1, 5000)
+			await ctx.send("C'est bon ! J'ai choisis un nombre entre 1 et 5000 !")
+			await ctx.send("Pour jouer tu peux utiliser la commande `!devine <nombre>`.")
+		else:
+			await ctx.send("Oups! Cette commande est incorrecte :/")
 
 	@commands.command()
 	async def devine(self, ctx, nombre):
@@ -19,11 +39,27 @@ class DevineLeNombre(commands.Cog):
 			if nombre == self.nombre_bot:
 				await ctx.send("Bravo, tu as gagné !")
 				await ctx.send("Le nombre était : " + str(self.nombre_bot))
-			elif nombre > 1000 or nombre <= 0:
-				await ctx.send("Oups ! Mon nombre n'est compris qu'entre 1 et 1000 !")
-			elif nombre > self.nombre_bot:
-				await ctx.send("Mon nombre est plus petit !")
-			elif nombre < self.nombre_bot:
-				await ctx.send("Mon nombre est plus grand !")
+				return
+			elif self.niveaux == "facile":
+				if nombre > 500 or nombre <= 0:
+					await ctx.send("Oups ! Mon nombre n'est compris qu'entre 1 et 500 !")
+				elif nombre > self.nombre_bot:
+					await ctx.send("Mon nombre est plus petit !")
+				elif nombre < self.nombre_bot:
+					await ctx.send("Mon nombre est plus grand !")
+			elif self.niveaux == "normal":
+				if nombre > 1000 or nombre <= 0:
+					await ctx.send("Oups ! Mon nombre n'est compris qu'entre 1 et 1000 !")
+				elif nombre > self.nombre_bot:
+					await ctx.send("Mon nombre est plus petit !")
+				elif nombre < self.nombre_bot:
+					await ctx.send("Mon nombre est plus grand !")
+			elif self.niveaux == "difficile":
+				if nombre > 5000 or nombre <= 0:
+					await ctx.send("Oups ! Mon nombre n'est compris qu'entre 1 et 5000 !")
+				elif nombre > self.nombre_bot:
+					await ctx.send("Mon nombre est plus petit !")
+				elif nombre < self.nombre_bot:
+					await ctx.send("Mon nombre est plus grand !")
 		except:
-			await ctx.send("Oups ! Ceci n'est pas un nombre !")
+				await ctx.send("Oups ! Ceci n'est pas un nombre !")
