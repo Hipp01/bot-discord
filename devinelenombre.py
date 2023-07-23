@@ -7,7 +7,7 @@ class DevineLeNombre(commands.Cog):
 		self.niveaux = None
 
 	@commands.command()
-	async def devine_le_nombre(self, ctx):
+	async def dln(self, ctx):
 		await ctx.send("Début de la partie !")
 		await ctx.send("Pour choisir le niveau tu peux utiliser les commandes:")
 		await ctx.send("`!niveau facile` pour chercher un nombre entre 1 et 500")
