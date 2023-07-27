@@ -1,10 +1,16 @@
 from discord.ext import commands
 import random
+from gamescore import ajout_points
 
 class DevineLeNombre(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 		self.niveaux = None
+
+	@commands.command()
+	async def test(self, ctx, points):
+		auteur = ctx.author.mention
+		ajout_points(auteur, points)
 
 	@commands.command()
 	async def dln(self, ctx):
@@ -42,41 +48,41 @@ class DevineLeNombre(commands.Cog):
 				await ctx.send("Le nombre était : " + str(self.nombre_bot))
 				if self.niveaux == "facile":
 					try:
-						fichier = open(name, 'r')
+						fichier = open("score/" + name, 'r')
 						scores = fichier.read()
 						fichier.close()
 						scores = str(int(scores)+1)
-						fichier = open(name, 'w')
+						fichier = open("score/" + name, 'w')
 						fichier.write(scores)
 						fichier.close()
 					except FileNotFoundError:
-						fichier = open(name, 'w')
+						fichier = open("score/" + name, 'w')
 						fichier.write("1")
 						fichier.close()
 				if self.niveaux == "normal":
 					try:
-						fichier = open(name, 'r')
+						fichier = open("score/" + name, 'r')
 						scores = fichier.read()
 						fichier.close()
 						scores = str(int(scores)+2)
-						fichier = open(name, 'w')
+						fichier = open("score/" + name, 'w')
 						fichier.write(scores)
 						fichier.close()
 					except FileNotFoundError:
-						fichier = open(name, 'w')
+						fichier = open("score/" + name, 'w')
 						fichier.write("2")
 						fichier.close()
 				if self.niveaux == "difficile":
 					try:
-						fichier = open(name, 'r')
+						fichier = open("score/" + name, 'r')
 						scores = fichier.read()
 						fichier.close()
 						scores = str(int(scores)+4)
-						fichier = open(name, 'w')
+						fichier = open("score/" + name, 'w')
 						fichier.write(scores)
 						fichier.close()
 					except FileNotFoundError:
-						fichier = open(name, 'w')
+						fichier = open("score/" + name, 'w')
 						fichier.write("4")
 						fichier.close()
 				return
