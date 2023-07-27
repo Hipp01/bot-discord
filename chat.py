@@ -5,6 +5,7 @@ from pendu import Pendu
 from funny import Funny
 from devinelenombre import DevineLeNombre
 from gamescore import Score
+from BatailleNavale import BatailleNavale
 
 intents = discord.Intents.default()
 intents.messages = True
@@ -21,6 +22,7 @@ async def on_ready():
     await bot.add_cog(Funny(bot))
     await bot.add_cog(DevineLeNombre(bot))
     await bot.add_cog(Score(bot))
+    await bot.add_cog(BatailleNavale(bot))
 
 @bot.command()
 async def ping(ctx):
