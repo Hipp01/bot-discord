@@ -8,11 +8,6 @@ class DevineLeNombre(commands.Cog):
 		self.niveaux = None
 
 	@commands.command()
-	async def test(self, ctx, points):
-		auteur = ctx.author.mention
-		ajout_points(auteur, points)
-
-	@commands.command()
 	async def dln(self, ctx):
 		await ctx.send("Début de la partie !")
 		await ctx.send("Pour choisir le niveau tu peux utiliser les commandes:")
@@ -47,45 +42,14 @@ class DevineLeNombre(commands.Cog):
 				await ctx.send("Bravo, tu as gagné !")
 				await ctx.send("Le nombre était : " + str(self.nombre_bot))
 				if self.niveaux == "facile":
-					try:
-						fichier = open("score/" + name, 'r')
-						scores = fichier.read()
-						fichier.close()
-						scores = str(int(scores)+1)
-						fichier = open("score/" + name, 'w')
-						fichier.write(scores)
-						fichier.close()
-					except FileNotFoundError:
-						fichier = open("score/" + name, 'w')
-						fichier.write("1")
-						fichier.close()
+					ajout_points(name, "1")
+					return
 				if self.niveaux == "normal":
-					try:
-						fichier = open("score/" + name, 'r')
-						scores = fichier.read()
-						fichier.close()
-						scores = str(int(scores)+2)
-						fichier = open("score/" + name, 'w')
-						fichier.write(scores)
-						fichier.close()
-					except FileNotFoundError:
-						fichier = open("score/" + name, 'w')
-						fichier.write("2")
-						fichier.close()
+					ajout_points(name, "2")
+					return				
 				if self.niveaux == "difficile":
-					try:
-						fichier = open("score/" + name, 'r')
-						scores = fichier.read()
-						fichier.close()
-						scores = str(int(scores)+4)
-						fichier = open("score/" + name, 'w')
-						fichier.write(scores)
-						fichier.close()
-					except FileNotFoundError:
-						fichier = open("score/" + name, 'w')
-						fichier.write("4")
-						fichier.close()
-				return
+					ajout_points(name, "4")
+					return
 			elif self.niveaux == "facile":
 				if nombre > 500 or nombre <= 0:
 					await ctx.send("Oups ! Mon nombre n'est compris qu'entre 1 et 500 !")
