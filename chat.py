@@ -1,10 +1,12 @@
-import discord, random, json
+import discord
+import json
 from discord.ext import commands
 from morpion import Morpion
 from pendu import Pendu
 from funny import Funny
 from devinelenombre import DevineLeNombre
 from gamescore import Score
+from BatailleNavale import BatailleNavale
 
 intents = discord.Intents.default()
 intents.messages = True
@@ -12,6 +14,7 @@ intents.message_content = True
 intents.members = True
 
 bot = commands.Bot(command_prefix='!', intents=intents)
+
 
 @bot.event
 async def on_ready():
@@ -21,6 +24,8 @@ async def on_ready():
     await bot.add_cog(Funny(bot))
     await bot.add_cog(DevineLeNombre(bot))
     await bot.add_cog(Score(bot))
+    await bot.add_cog(BatailleNavale(bot))
+
 
 @bot.command()
 async def ping(ctx):

@@ -1,8 +1,8 @@
-import discord
 from discord.ext import commands
 import random
 
 mots = ["morpion", "python", "pendu", "test"]
+
 
 class Pendu(commands.Cog):
     def __init__(self, bot):
