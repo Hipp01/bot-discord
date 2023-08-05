@@ -1,5 +1,6 @@
 from discord.ext import commands
 
+
 def ajout_points(name, points):
 	try:
 		fichier = open("score/" + name, 'r')
@@ -17,8 +18,8 @@ def ajout_points(name, points):
 		return points
 
 class Score(commands.Cog):
-	def __init__(self, bot):
-		self.bot = bot
+    def __init__(self, bot):
+        self.bot = bot
 
 	@commands.command()
 	async def score(self, ctx):
