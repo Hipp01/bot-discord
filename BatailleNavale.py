@@ -77,15 +77,34 @@ class BatailleNavale:
 
         return True     
         
-        
     def afficher_grille(self, joueur):
         """
         Affiche la grille du joueur avec les navires et les tirs.
 
         Parameters:
             joueur (str): Le nom du joueur.
+
+        Returns:
+            str: La grille du joueur sélectionné
         """
-        pass
+        grille = self.grille_joueur1 if joueur == self.joueur1 else self.grille_joueur2
+        affichage = "   A B C D E F G H I J\n"
+
+        for y in range(10):
+            ligne = f"{y} | "
+            for x in range(10):
+                case = grille[y][x]
+                if case == 0:
+                    ligne += " ~"
+                elif case == "X":
+                    ligne += " X"
+                elif case == "O":
+                    ligne += " O"
+                else:
+                    ligne += " " + case
+            affichage += ligne + '\n'
+
+        return affichage
 
     def tirer(self, joueur, x, y):
         """
