@@ -1,7 +1,14 @@
 from discord.ext import commands
 import random
 
-mots = ["morpion", "python", "pendu", "test"]
+
+def get_words_with_special_characters():
+    with open("liste_francais.txt", 'r') as file:
+        lines = file.readlines()
+    return lines
+
+
+mots = get_words_with_special_characters()
 
 
 class Pendu(commands.Cog):
@@ -13,7 +20,7 @@ class Pendu(commands.Cog):
 
     @commands.command()
     async def pendu(self, ctx):
-        self.mot = random.choice(mots)
+        self.mot = random.choice(mots)[:-1]
         self.deja_proposees = []
         await ctx.send("Le mot à trouver contient " + str(len(self.mot)) + " lettres.")
         self.lettres = ['_'] * len(self.mot)
