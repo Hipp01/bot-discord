@@ -32,13 +32,11 @@ class BatailleNavale:
         """
         if joueur == self.joueur1:
             grille = self.grille_joueur1
-            navires = self.navires_joueur1
         else:
             grille = self.grille_joueur2
-            navires = self.navires_joueur2
 
         # vérifie si les coordonnées sont dans la grille
-        if x<=0 or x>10 or y<=0 or y>10:
+        if x <= 0 or x > 10 or y <= 0 or y > 10:
             return False
 
         # vérifie que l'orientation est valide
@@ -50,7 +48,7 @@ class BatailleNavale:
                 return False
         else:
             return False
-        
+
         # vérifier que l'emplacement du navire est disponible
         for i in range(len(navire)):
             if orientation == "horizontal":
@@ -59,25 +57,24 @@ class BatailleNavale:
             if orientation == "vertical":
                 if grille[y + i][x] != 0:
                     return False
-        
+
         # ajoute le navire dans la grille courante
         for i in range(len(navire)):
             if orientation == "horizontal":
-                grille[y][x+i] = navire[i]
+                grille[y][x + i] = navire[i]
             elif orientation == "vertical":
                 grille[y + i][x] = navire[i]
 
         # ajoute le navire à la grille du joueur
-        if joueur == self.joueur1 :
+        if joueur == self.joueur1:
             self.grille_joueur1 = grille
             self.navires_joueur1.remove(navire)
-        elif joueur == self.joueur2 :
+        elif joueur == self.joueur2:
             self.grille_joueur2 = grille
             self.navires_joueur2.remove(navire)
 
-        return True     
-        
-        
+        return True
+
     def afficher_grille(self, joueur):
         """
         Affiche la grille du joueur avec les navires et les tirs.

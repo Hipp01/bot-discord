@@ -1,6 +1,7 @@
 from discord.ext import commands
 import random
 
+
 class Morpion(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
@@ -35,7 +36,7 @@ class Morpion(commands.Cog):
 
 		await ctx.send("A mon tour : ")
 		computer_move = self.get_computer_move()
-		self.board[computer_move-1] = self.players["bot"]
+		self.board[computer_move - 1] = self.players["bot"]
 		await self.display_board(ctx)
 		if self.check_winner(self.players["bot"]):
 			await ctx.send("J'ai gagné !")
@@ -45,12 +46,12 @@ class Morpion(commands.Cog):
 
 	async def display_board(self, ctx):
 		await ctx.send("```\n"
-					   f" {self.board[0]} | {self.board[1]} | {self.board[2]} \n"
-					   "---+---+---\n"
-					   f" {self.board[3]} | {self.board[4]} | {self.board[5]} \n"
-					   "---+---+---\n"
-					   f" {self.board[6]} | {self.board[7]} | {self.board[8]} \n"
-					   "```")
+						f" {self.board[0]} | {self.board[1]} | {self.board[2]} \n"
+						"---+---+---\n"
+						f" {self.board[3]} | {self.board[4]} | {self.board[5]} \n"
+						"---+---+---\n"
+						f" {self.board[6]} | {self.board[7]} | {self.board[8]} \n"
+						"```")
 
 	def check_winner(self, symbol):
 		return (self.board[0] == self.board[1] == self.board[2] == symbol or

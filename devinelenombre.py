@@ -2,6 +2,7 @@ from discord.ext import commands
 import random
 from gamescore import ajout_points
 
+
 class DevineLeNombre(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
@@ -51,7 +52,7 @@ class DevineLeNombre(commands.Cog):
 						fichier = open("score/" + name, 'r')
 						scores = fichier.read()
 						fichier.close()
-						scores = str(int(scores)+1)
+						scores = str(int(scores) + 1)
 						fichier = open("score/" + name, 'w')
 						fichier.write(scores)
 						fichier.close()
@@ -64,7 +65,7 @@ class DevineLeNombre(commands.Cog):
 						fichier = open("score/" + name, 'r')
 						scores = fichier.read()
 						fichier.close()
-						scores = str(int(scores)+2)
+						scores = str(int(scores) + 2)
 						fichier = open("score/" + name, 'w')
 						fichier.write(scores)
 						fichier.close()
@@ -77,7 +78,7 @@ class DevineLeNombre(commands.Cog):
 						fichier = open("score/" + name, 'r')
 						scores = fichier.read()
 						fichier.close()
-						scores = str(int(scores)+4)
+						scores = str(int(scores) + 4)
 						fichier = open("score/" + name, 'w')
 						fichier.write(scores)
 						fichier.close()
@@ -107,5 +108,5 @@ class DevineLeNombre(commands.Cog):
 					await ctx.send("Mon nombre est plus petit !")
 				elif nombre < self.nombre_bot:
 					await ctx.send("Mon nombre est plus grand !")
-		except:
-				await ctx.send("Oups ! Ceci n'est pas un nombre !")
+		except ValueError:
+			await ctx.send("Oups ! Ceci n'est pas un nombre !")

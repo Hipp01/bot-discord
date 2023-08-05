@@ -1,4 +1,5 @@
-import discord, random, json
+import discord
+import json
 from discord.ext import commands
 from morpion import Morpion
 from pendu import Pendu
@@ -14,6 +15,7 @@ intents.members = True
 
 bot = commands.Bot(command_prefix='!', intents=intents)
 
+
 @bot.event
 async def on_ready():
     print("Bot is ready !")
@@ -23,6 +25,7 @@ async def on_ready():
     await bot.add_cog(DevineLeNombre(bot))
     await bot.add_cog(Score(bot))
     await bot.add_cog(BatailleNavale(bot))
+
 
 @bot.command()
 async def ping(ctx):
