@@ -8,6 +8,7 @@ class DevineLeNombre(commands.Cog):
         self.bot = bot
         self.niveaux = None
 
+
     @commands.command()
     async def test(self, ctx, points):
         auteur = ctx.author.mention
@@ -20,6 +21,7 @@ class DevineLeNombre(commands.Cog):
         await ctx.send("`!niveau facile` pour chercher un nombre entre 1 et 500 (+1 point)")
         await ctx.send("`!niveau normal` pour chercher un nombre entre 1 et 1000 (+2 points)")
         await ctx.send("`!niveau difficile` pour chercher un nombre entre 1 et 5000 (+4 points)")
+
 
     @commands.command()
     async def niveau(self, ctx, niveaux):
